@@ -10,7 +10,7 @@ import gdown
 model_path = "brain_tumor_model.keras"
 
 if not os.path.exists(model_path):
-    url = "https://drive.google.com/uc?id=1MK9Jg4geoEhjZtCZJPiEKYFEFlM3EYnh"
+    url = "https://drive.google.com/uc?id=1qMesExm-RtXsDB-5or1dCyi6u6veki6n"
     gdown.download(url, model_path, quiet=False)
 
 model = load_model(model_path)
