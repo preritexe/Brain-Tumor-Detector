@@ -7,14 +7,19 @@ import requests
 from preprocess import preprocess_img
 from gradcam import get_gradcam_heatmap, overlay_heatmap
 
-MODEL_PATH = "brain_tumor_model.keras"
+MODEL_PATH = "brain_tumor_model.h5"
 
-url = "https://github.com/preritexe/Brain-Tumor-Detector/releases/download/v1.0/brain_tumor_model.keras"
+url = "https://github.com/preritexe/Brain-Tumor-Detector/releases/download/v2.0/brain_tumor_model.h5"
 
 if not os.path.exists(MODEL_PATH):
-    os.system(f"wget -O {MODEL_PATH} {url}")
+    with requests.get(url, stream=True) as r:
+        r.raise_for_status()
+        with open(MODEL_PATH, "wb") as f:
+            for chunk in r.iter_content(chunk_size=8192):
+                if chunk:
+                    f.write(chunk)
 
-print("File size:", os.path.getsize(MODEL_PATH))
+print("Model size:", os.path.getsize(MODEL_PATH))
 
 model = load_model(MODEL_PATH)
 
