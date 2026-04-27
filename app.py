@@ -21,7 +21,11 @@ if not os.path.exists(MODEL_PATH):
 
 print("Model size:", os.path.getsize(MODEL_PATH))
 
-model = load_model(MODEL_PATH)
+@st.cache_resource
+def load_my_model():
+    return load_model(MODEL_PATH)
+
+model = load_my_model()
 
 st.title("🧠 Brain Tumor Detector")
 st.warning("⚠️ Please upload only brain MRI images. Other images may give incorrect results.")
