@@ -3,6 +3,7 @@ import numpy as np
 import cv2
 from tensorflow.keras.models import load_model
 import os
+import requests
 from preprocess import preprocess_img
 from gradcam import get_gradcam_heatmap, overlay_heatmap
 import gdown
