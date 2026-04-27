@@ -7,13 +7,15 @@ from preprocess import preprocess_img
 from gradcam import get_gradcam_heatmap, overlay_heatmap
 import gdown
 
-model_path = "brain_tumor_model.keras"
+MODEL_PATH = "brain_tumor_model.keras"
 
-if not os.path.exists(model_path):
-    url = "https://drive.google.com/uc?id=1qMesExm-RtXsDB-5or1dCyi6u6veki6n"
-    gdown.download(url, model_path, quiet=False)
+if not os.path.exists(MODEL_PATH):
+    url = "https://github.com/preritexe/Brain-Tumor-Detector/releases/download/v1.0/brain_tumor_model.keras"
+    response = requests.get(url)
+    with open(MODEL_PATH, "wb") as f:
+        f.write(response.content)
 
-model = load_model(model_path)
+model = load_model(MODEL_PATH)
 
 st.title("🧠 Brain Tumor Detector")
 st.warning("⚠️ Please upload only brain MRI images. Other images may give incorrect results.")
