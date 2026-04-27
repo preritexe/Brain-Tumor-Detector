@@ -4,5 +4,4 @@ numpy
 opencv-python-headless
 matplotlib
 scikit-learn
-gdown
 requests
