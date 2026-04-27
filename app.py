@@ -5,7 +5,13 @@ from tensorflow.keras.models import load_model
 from preprocess import preprocess_img
 from gradcam import get_gradcam_heatmap, overlay_heatmap
 
-model = load_model("brain_tumor_model.keras")
+model_path = "brain_tumor_model.keras"
+
+if not os.path.exists(model_path):
+    url = "https://drive.google.com/uc?id=1MK9Jg4geoEhjZtCZJPiEKYFEFlM3EYnh"
+    gdown.download(url, model_path, quiet=False)
+
+model = load_model(model_path)
 
 st.title("🧠 Brain Tumor Detector")
 st.warning("⚠️ Please upload only brain MRI images. Other images may give incorrect results.")
